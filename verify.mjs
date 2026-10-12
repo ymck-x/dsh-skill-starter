@@ -1,5 +1,5 @@
 /**
- * dsh-skills 自测：解析、渲染往返、扫描、增删改查、路径安全。
+ * dsh-skill-starter 自测：解析、渲染往返、扫描、增删改查、路径安全。
  * 跑法：node "<插件目录>\verify.mjs"
  */
 import assert from 'node:assert/strict'
@@ -56,14 +56,14 @@ check('不存在的目录返回空', () => {
 })
 
 console.log('4. 管理接口')
-const root = mkdtempSync(join(tmpdir(), 'dsh-skills-'))
+const root = mkdtempSync(join(tmpdir(), 'dsh-skill-starter-'))
 const userDir = join(root, 'skills')
 const admin = new SkillAdmin({ userDir, builtinDir: join(pluginDir, 'skills') })
 
 async function call(body, headers = {}) {
-  const request = new Request('http://127.0.0.1/api/dsh-skills/manage', {
+  const request = new Request('http://127.0.0.1/api/dsh-skill-starter/manage', {
     method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-dsh-skills-action': '1', ...headers },
+    headers: { 'content-type': 'application/json', 'x-dsh-skill-starter-action': '1', ...headers },
     body: JSON.stringify(body),
   })
   const response = await admin.handle(request)
@@ -147,7 +147,7 @@ try {
     assert.equal(removeMissing.status, 400)
   })
 
-  const noHeader = await call({ action: 'list' }, { 'x-dsh-skills-action': '0' })
+  const noHeader = await call({ action: 'list' }, { 'x-dsh-skill-starter-action': '0' })
   check('缺少自定义请求头被拒绝', () => {
     assert.equal(noHeader.status, 403)
   })
@@ -190,7 +190,7 @@ console.log('5. 客户端分组与文案')
 
 console.log('6. 技能工具')
 {
-  const toolRoot = mkdtempSync(join(tmpdir(), 'dsh-skills-tools-'))
+  const toolRoot = mkdtempSync(join(tmpdir(), 'dsh-skill-starter-tools-'))
   try {
     const toolAdmin = new SkillAdmin({ userDir: join(toolRoot, 'skills'), builtinDir: join(pluginDir, 'skills') })
     const tools = mod.buildSkillTools(toolAdmin)
@@ -310,7 +310,7 @@ console.log('6. 技能工具')
       assert.equal(ticketSkill.skill.files.includes('ISSUE-TRACKER-TEMPLATE.md'), true)
     })
 
-    const projectRoot = mkdtempSync(join(tmpdir(), 'dsh-skills-proj-'))
+    const projectRoot = mkdtempSync(join(tmpdir(), 'dsh-skill-starter-proj-'))
     try {
       mkdirSync(join(projectRoot, '.git'), { recursive: true })
       const projectSkillDir = join(projectRoot, '.dsh', 'skills', 'proj-note')
@@ -340,7 +340,7 @@ console.log('6. 技能工具')
     const missingPack = await byName.get('skill_pack_install').execute({ packId: 'no-such-pack' })
     check('装不存在的包会失败', () => assert.equal(missingPack.ok, false))
 
-    const keepRoot = mkdtempSync(join(tmpdir(), 'dsh-skills-keep-'))
+    const keepRoot = mkdtempSync(join(tmpdir(), 'dsh-skill-starter-keep-'))
     try {
       const keepAdmin = new SkillAdmin({
         userDir: keepRoot,
@@ -359,7 +359,7 @@ console.log('6. 技能工具')
       rmSync(keepRoot, { recursive: true, force: true })
     }
 
-    const roadRoot = mkdtempSync(join(tmpdir(), 'dsh-skills-road-'))
+    const roadRoot = mkdtempSync(join(tmpdir(), 'dsh-skill-starter-road-'))
     try {
       mkdirSync(join(roadRoot, 'skills-map'), { recursive: true })
       writeFileSync(join(roadRoot, 'skills-map', 'SKILL.md'), [

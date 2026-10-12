@@ -2,7 +2,7 @@
  * 量一下每轮对话的固定开销：
  *   - 技能目录：每个技能只注入 name + description
  *   - 工具 schema：六个工具的 name + description + 参数结构
- * 跑法：node "C:\Users\Administrator\.dsh\profiles\desktop\plugins\dsh-skills\measure.mjs"
+ * 跑法：node "C:\Users\Administrator\.dsh\profiles\desktop\plugins\dsh-skill-starter\measure.mjs"
  */
 import { readFileSync } from 'node:fs'
 import { homedir } from 'node:os'

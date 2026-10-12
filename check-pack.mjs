@@ -1,7 +1,7 @@
 /**
  * 检查技能包内容是否符合重写规范。
  * 检查项：单文件、frontmatter 完整、长度、人工发起标记、禁用术语、附件残留。
- * 跑法：node "C:\Users\Administrator\.dsh\profiles\desktop\plugins\dsh-skills\check-pack.mjs"
+ * 跑法：node "C:\Users\Administrator\.dsh\profiles\desktop\plugins\dsh-skill-starter\check-pack.mjs"
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'

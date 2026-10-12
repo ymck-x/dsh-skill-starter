@@ -16,12 +16,51 @@
 ## 安装
 
 ```sh
-dsh plugin --profile desktop add github:ymck-x/dsh-skill-starter
+dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/archive/refs/heads/main.tar.gz
 ```
 
 `desktop` 换成你自己的 profile 名（`~/.dsh/profiles/` 下面的目录名）。装完重启 `dsh`。
 
+**请用上面这个完整地址，不要用 `github:ymck-x/dsh-skill-starter` 这种简写。** 简写会被 pnpm 解析成 SSH 地址（`git+ssh://`），而匿名 SSH 访问 GitHub 会被直接拒绝，装不上。
+
 验证：设置页里出现「**Skill 管理**」这一项，或者直接问 AI「我有哪些技能」。
+
+### 没有 dsh 命令时手动装
+
+`dsh plugin add` 内部就是「pnpm 装包 + 把包名写进 `dsh.profile.bundles`」。你也可以自己做这两步：
+
+```sh
+cd ~/.dsh/profiles/desktop
+pnpm add https://github.com/ymck-x/dsh-skill-starter/archive/refs/heads/main.tar.gz
+```
+
+再把 `dsh-skill-starter` 加进同一个目录里 `package.json` 的 `dsh.profile.bundles`：
+
+```json
+{
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dsh-skill-starter"
+      ]
+    }
+  }
+}
+```
+
+重启 `dsh` 即生效。
+
+### 卸载
+
+```sh
+dsh plugin --profile desktop remove dsh-skill-starter
+```
+
+手动装的：从 `bundles` 里删掉这一项，再 `pnpm remove dsh-skill-starter`。
+
+**卸载不影响你写的技能**——它们在 `~\.dsh\skills\` 里，不属于插件。
 
 ---
 

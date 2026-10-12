@@ -19,7 +19,7 @@ import { dirname, join, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 /** Loader 诊断里显示的名字。 */
-export const name = 'dsh-skills'
+export const name = 'dsh-skill-starter'
 /** 等 skill 注册表与工具注册表就绪后再激活；connection 在 apply 内延迟注入。 */
 export const inject = ['skills', 'tools']
 
@@ -57,7 +57,7 @@ function describe(error) {
  */
 function trace(line) {
   try {
-    appendFileSync(join(dshHome, 'dsh-skills.log'), `${new Date().toISOString()} ${line}\n`)
+    appendFileSync(join(dshHome, 'dsh-skill-starter.log'), `${new Date().toISOString()} ${line}\n`)
   } catch {
     /* 诊断写入失败不影响插件 */
   }
@@ -1059,7 +1059,7 @@ export function apply(ctx, config = {}) {
           content: skill.content,
           invocation: { modelInvocable: skill.modelInvocable, userInvocable: skill.userInvocable },
           resourceBase: { kind: 'directory', path: entry.dir },
-          source: 'dsh-skills',
+          source: 'dsh-skill-starter',
         }),
       )
     } catch (error) {

@@ -21,12 +21,18 @@
 ## 安装
 
 ```sh
-dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/archive/refs/heads/main.tar.gz
+dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/archive/refs/tags/v0.3.0.tar.gz
 ```
 
 `desktop` 换成你自己的 profile 名（`~/.dsh/profiles/` 下面的目录名）。装完重启 `dsh`。
 
-**请用上面这个完整地址，不要用 `github:ymck-x/dsh-skill-starter` 这种简写。** 简写会被 pnpm 解析成 SSH 地址（`git+ssh://`），而匿名 SSH 访问 GitHub 会被直接拒绝，装不上。
+> **请照抄这个完整地址，不要改成 `refs/heads/main.tar.gz`。**
+> 分支地址的内容会随作者推代码而改变，而 pnpm 会记下你安装当时的指纹。
+> 之后你装**任何**插件时，pnpm 都会重新核对全部旧依赖，一旦发现指纹对不上就中止整次安装
+> （`ERR_PNPM_TARBALL_INTEGRITY`），而且报错指向一个你当时根本没在装的包。
+> `refs/tags/` 指向一次固定发布，内容永不改变。
+
+也不要写成 `github:ymck-x/dsh-skill-starter` 这种简写：它会被 pnpm 解析成 SSH 地址（`git+ssh://`），而匿名 SSH 访问 GitHub 会被直接拒绝，装不上。
 
 验证：设置页里出现「**Skill 管理**」这一项，或者直接问 AI「我有哪些技能」。
 
@@ -36,7 +42,7 @@ dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/arc
 
 ```sh
 cd ~/.dsh/profiles/desktop
-pnpm add https://github.com/ymck-x/dsh-skill-starter/archive/refs/heads/main.tar.gz
+pnpm add https://github.com/ymck-x/dsh-skill-starter/archive/refs/tags/v0.3.0.tar.gz
 ```
 
 再把 `dsh-skill-starter` 加进同一个目录里 `package.json` 的 `dsh.profile.bundles`：

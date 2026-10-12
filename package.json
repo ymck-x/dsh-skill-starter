@@ -4,6 +4,10 @@
   "description": "DSH 技能管理器：自带 6 个开箱可用的基础技能和 20 个中文工程流程技能的技能包；设置页按「你遇到的问题」分组展示、编辑、新建，模型也能在对话里直接读写技能库；升级技能包不会覆盖你改过的文件。",
   "type": "module",
   "main": "index.js",
+  "scripts": {
+    "test": "node verify.mjs && node check-pack.mjs",
+    "prepublishOnly": "node verify.mjs && node check-pack.mjs"
+  },
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -54,5 +58,8 @@
     "url": "https://github.com/ymck-x/dsh-skill-starter/issues"
   },
   "homepage": "https://github.com/ymck-x/dsh-skill-starter#readme",
-  "author": "ymck-x"
+  "author": "ymck-x",
+  "publishConfig": {
+    "access": "public"
+  }
 }

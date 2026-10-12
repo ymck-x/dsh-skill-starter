@@ -1,0 +1,58 @@
+{
+  "name": "dsh-skill-starter",
+  "version": "0.3.0",
+  "description": "DSH 技能管理器：自带 6 个开箱可用的基础技能和 20 个中文工程流程技能的技能包；设置页按「你遇到的问题」分组展示、编辑、新建，模型也能在对话里直接读写技能库；升级技能包不会覆盖你改过的文件。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "skills",
+    "packs",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "REWRITE-GUIDE.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plugin",
+    "skills",
+    "skill-manager",
+    "skill-pack",
+    "cordis"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymck-x/dsh-skill-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ymck-x/dsh-skill-starter/issues"
+  },
+  "homepage": "https://github.com/ymck-x/dsh-skill-starter#readme",
+  "author": "ymck-x"
+}

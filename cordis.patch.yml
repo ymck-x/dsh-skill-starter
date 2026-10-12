@@ -1,0 +1,17 @@
+# dsh-skill-starter：技能管理器插件（DeepSeek Harness 插件）。
+#
+# 安装即同时注册：
+#   1. 插件自带的 6 个基础技能（ask-first / plain-words / prove-it / tiny-steps / write-my-skill / setup-tickets）
+#   2. 六个工具：skill_list / skill_read / skill_write / skill_delete / skill_pack_list / skill_pack_install
+#   3. 设置页里的「Skill 管理」面板
+#
+# 插件自带空配置，绝不弄崩启动；不需要任何账号或密钥。可选配置：
+#
+#   - id: dsh-skill-starter
+#     config:
+#       enableTools: false    # 可选：不注册六个工具，只保留设置面板，模型侧开销归零
+#
+- insert:
+    - id: dsh-skill-starter
+      name: dsh-skill-starter
+      config: {}

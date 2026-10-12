@@ -1,0 +1,41 @@
+{
+  "id": "engineering-zh",
+  "name": "工程流程技能包（中文版）",
+  "nameEn": "Engineering Workflow Pack (Chinese)",
+  "version": "2.1.0",
+  "description": "从需求拷问一路走到复盘的一整套工程流程技能（中文）：拷问需求、拆票、实现、双轴审查、诊断 bug、TDD、原型、研究、交接、复盘、教学。",
+  "license": "MIT",
+  "updatedAt": "2026-10-13",
+  "overlaps": {
+    "ask-first": "grilling",
+    "plain-words": "wait-what",
+    "write-my-skill": "writing-for-agents"
+  },
+  "notes": [
+    "每个技能的正文保持一屏内；词汇表、判断标准、例证与模板这类细节放在同目录的附件里，正文末尾有一行指针。",
+    "to-spec、to-tickets、implement 依赖本地 Markdown 票据约定，用内置技能 setup-tickets 一次创建。",
+    "handoff、implement、teach、to-spec、to-tickets、to-questionnaire、wait-what、retro、improve-codebase-architecture 只允许人工发起。"
+  ],
+  "skills": [
+    "grilling",
+    "tdd",
+    "diagnosing-bugs",
+    "code-review",
+    "domain-modeling",
+    "codebase-design",
+    "to-questionnaire",
+    "wait-what",
+    "writing-for-agents",
+    "pr",
+    "implement",
+    "prototype",
+    "handoff",
+    "research",
+    "retro",
+    "teach",
+    "improve-codebase-architecture",
+    "to-spec",
+    "to-tickets",
+    "skills-map"
+  ]
+}

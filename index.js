@@ -1,9 +1,9 @@
 /**
- * dsh-skills —— 技能管理插件（宿主侧）。
+ * dsh-skill-starter —— 技能管理插件（宿主侧）。
  *
  * 做三件事：
  *   1. 把包内 skills/ 下的默认技能注册进技能注册表（全局层，优先级最弱）
- *   2. 提供 /api/dsh-skills/manage 接口，供设置页列出、读取、保存、删除用户技能
+ *   2. 提供 /api/dsh-skill-starter/manage 接口，供设置页列出、读取、保存、删除用户技能
  *   3. 支持把内置技能复制到用户技能目录，复制之后以用户版本为准
  *
  * 用户技能目录（<DSH_HOME>/skills）由 DSH 自带的 dsh-skill-filesystem 提供方
@@ -24,9 +24,9 @@ export const name = 'dsh-skill-starter'
 export const inject = ['skills', 'tools']
 
 /** 管理接口路径，客户端 client.js 用同一个常量。 */
-const ROUTE = '/api/dsh-skills/manage'
+const ROUTE = '/api/dsh-skill-starter/manage'
 /** 自定义请求头，挡掉非面板来源的请求。 */
-const ACTION_HEADER = 'x-dsh-skills-action'
+const ACTION_HEADER = 'x-dsh-skill-starter-action'
 /** 技能名规则，与 DSH 注册表一致：kebab-case。 */
 const NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 /** 上限，防止面板被超大请求拖垮。 */
@@ -52,7 +52,7 @@ function describe(error) {
 }
 
 /**
- * 启动追踪：把每一步写进 <DSH_HOME>/dsh-skills.log。
+ * 启动追踪：把每一步写进 <DSH_HOME>/dsh-skill-starter.log。
  * 宿主插件代码改动不会热生效，只能靠 profile 重载，所以需要这份日志判断到底加载了哪一版。
  */
 function trace(line) {
@@ -1048,7 +1048,7 @@ export function apply(ctx, config = {}) {
     try {
       const skill = loadSkill(entry)
       if (skill === undefined) {
-        warn(`[dsh-skills] 跳过内置技能 ${entry.file}：frontmatter 缺少合法的 name/description，或正文为空`)
+        warn(`[dsh-skill-starter] 跳过内置技能 ${entry.file}：frontmatter 缺少合法的 name/description，或正文为空`)
         continue
       }
       disposers.push(
@@ -1063,7 +1063,7 @@ export function apply(ctx, config = {}) {
         }),
       )
     } catch (error) {
-      warn(`[dsh-skills] 内置技能注册失败：${describe(error)}`)
+      warn(`[dsh-skill-starter] 内置技能注册失败：${describe(error)}`)
     }
   }
 
@@ -1094,7 +1094,7 @@ export function apply(ctx, config = {}) {
         if (typeof dispose === 'function') disposers.push(dispose)
       } catch (error) {
         trace(`工具 ${definition.name} 注册失败：${describe(error)}`)
-        warn(`[dsh-skills] 工具 ${definition.name} 注册失败：${describe(error)}`)
+        warn(`[dsh-skill-starter] 工具 ${definition.name} 注册失败：${describe(error)}`)
       }
     }
   }
@@ -1124,7 +1124,7 @@ export function apply(ctx, config = {}) {
   }
 
   try {
-    ctx.logger?.info?.(`[dsh-skills] 已注册内置技能，用户技能目录：${admin.userDir}`)
+    ctx.logger?.info?.(`[dsh-skill-starter] 已注册内置技能，用户技能目录：${admin.userDir}`)
   } catch {
     /* 忽略日志失败 */
   }

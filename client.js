@@ -1,13 +1,13 @@
 // 浏览器源码，直接分发，不经任何构建步骤重写。
 // 设置页「技能管理」板块：列出、编辑、新建技能，把内置技能复制成自己的。
 // 文案走 DSH 的本地化服务，跟随界面语言切换。
-window.__ModuleLoader__.load({ id: 'dsh-skills', factory: require => {
+window.__ModuleLoader__.load({ id: 'dsh-skill-starter', factory: require => {
   const React = require('react')
   const { useState, useEffect, useCallback, useRef } = React
   const h = React.createElement
-  const ROUTE = 'api/dsh-skills/manage'
+  const ROUTE = 'api/dsh-skill-starter/manage'
   /** 字典命名空间，与宿主侧包名一致。 */
-  const NS = 'dsh-skills'
+  const NS = 'dsh-skill-starter'
   const EMPTY = { name: '', description: '', whenToUse: '', modelInvocable: true, userInvocable: true, content: '' }
 
   /** 英文文案。 */
@@ -263,7 +263,7 @@ window.__ModuleLoader__.load({ id: 'dsh-skills', factory: require => {
     try {
       response = await fetch(new URL(ROUTE, document.baseURI), {
         method: 'POST', credentials: 'same-origin', signal,
-        headers: { 'content-type': 'application/json', 'x-dsh-skills-action': '1' },
+        headers: { 'content-type': 'application/json', 'x-dsh-skill-starter-action': '1' },
         body: JSON.stringify(body),
       })
     } catch (problem) {
@@ -626,10 +626,10 @@ window.__ModuleLoader__.load({ id: 'dsh-skills', factory: require => {
 
   function apply(ctx) {
     const t = ctx.locale.bind(NS)
-    ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-skills: section dictionaries')
+    ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-skill-starter: section dictionaries')
     ctx.slots.inject('settings.section', () => ctx.slots.register({
       name: 'settings.section',
-      id: 'dsh-skills',
+      id: 'dsh-skill-starter',
       order: 57,
       label: () => t('nav'),
       locale: NS,

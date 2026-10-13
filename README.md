@@ -21,20 +21,30 @@
 ## 安装
 
 ```sh
-dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/archive/refs/tags/v0.3.0.tar.gz
+dsh plugin --profile desktop add dsh-skill-starter
 ```
 
 `desktop` 换成你自己的 profile 名（`~/.dsh/profiles/` 下面的目录名）。装完重启 `dsh`。
+
+包在 npm 上：<https://www.npmjs.com/package/dsh-skill-starter>。
+
+验证：设置页里出现「**Skill 管理**」这一项，或者直接问 AI「我有哪些技能」。
+
+### 装不下来时改用源码包
+
+网络或镜像有问题时，改用 GitHub 上的固定 tag 地址：
+
+```sh
+dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/archive/refs/tags/v0.3.0.tar.gz
+```
 
 > **请照抄这个完整地址，不要改成 `refs/heads/main.tar.gz`。**
 > 分支地址的内容会随作者推代码而改变，而 pnpm 会记下你安装当时的指纹。
 > 之后你装**任何**插件时，pnpm 都会重新核对全部旧依赖，一旦发现指纹对不上就中止整次安装
 > （`ERR_PNPM_TARBALL_INTEGRITY`），而且报错指向一个你当时根本没在装的包。
-> `refs/tags/` 指向一次固定发布，内容永不改变。
+> `refs/tags/` 指向一次固定发布，内容永不改变——代价是**换版本时要手改上面那个 tag 号**。
 
 也不要写成 `github:ymck-x/dsh-skill-starter` 这种简写：它会被 pnpm 解析成 SSH 地址（`git+ssh://`），而匿名 SSH 访问 GitHub 会被直接拒绝，装不上。
-
-验证：设置页里出现「**Skill 管理**」这一项，或者直接问 AI「我有哪些技能」。
 
 ### 没有 dsh 命令时手动装
 
@@ -42,8 +52,10 @@ dsh plugin --profile desktop add https://github.com/ymck-x/dsh-skill-starter/arc
 
 ```sh
 cd ~/.dsh/profiles/desktop
-pnpm add https://github.com/ymck-x/dsh-skill-starter/archive/refs/tags/v0.3.0.tar.gz
+pnpm add dsh-skill-starter
 ```
+
+从 npm 装不下来时，把 `dsh-skill-starter` 换成上面那个 GitHub tag 地址。
 
 再把 `dsh-skill-starter` 加进同一个目录里 `package.json` 的 `dsh.profile.bundles`：
 
@@ -310,6 +322,8 @@ node measure.mjs       # 量出每轮对话的固定开销
 
 要往包里加技能、或者重写技能时，先读 [`REWRITE-GUIDE.md`](REWRITE-GUIDE.md)：那里记了附件该怎么分类（模板类压进正文，方法类与机制类必须留附件），以及第一次重写时因为「一律单文件」而丢掉 19% 内容的教训。
 
+要发版时，先读 [`RELEASING.md`](RELEASING.md)：npm 现在只认勾了 `Bypass 2FA` 的令牌，那份文档写着令牌怎么建、`.npmrc` 怎么写、发布后必须收回什么，以及 `403` 和 `404` 各自真正代表什么（`404` 不是包名问题，是认证无效）。那份文档整份复制到别的项目也能用。
+
 ### 目录结构
 
 ```
@@ -325,6 +339,7 @@ dsh-skill-starter/
   check-pack.mjs         技能包规范校验
   measure.mjs            成本测量
   REWRITE-GUIDE.md       重写或新增技能的规范
+  RELEASING.md           发版到 npm 的流程（可整份复制到别的项目）
   CHANGELOG.md           更新记录
 ```
 
